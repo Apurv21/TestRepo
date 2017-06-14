@@ -75,6 +75,10 @@ namespace TestCreateOrder
             }
         }
 
+        /// <summary>
+        /// Method checks connectivity with MSCRM orgnaizaiton
+        /// </summary>
+        /// <param name="service">Organization service</param>
         private void CheckConnectivity(IOrganizationService service)
         {
             try
