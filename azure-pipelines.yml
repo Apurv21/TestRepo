@@ -12,7 +12,20 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+- task: MSCRMExportSolution@10
+  inputs:
+    crmConnectionString: 'https://ctsdevopssource.api.crm.dynamics.com/api/data/v9.1/'
+    solutionName: 'SampleSolution'
+    exportManaged: false
+    exportUnmanaged: true
+    outputPath: '- task: MSCRMImportSolution@11
+  inputs:
+    crmConnectionString: 'https://ctsdevopsdestination.api.crm.dynamics.com/api/data/v9.1/'
+    solutionFile: '$(build.binariesdirectory)/SampleSolution.zip'
 
+- task: MSCRMPublishCustomizations@10
+  inputs:
+    crmConnectionString: 'https://ctsdevopsdestination.api.crm.dynamics.com/api/data/v9.1/'
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
